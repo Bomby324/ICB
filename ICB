@@ -1,0 +1,106 @@
+-- Load
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/GreenDeno/Venyx-UI-Library/main/source.lua"))()
+local venyx = library.new('ItWasCozyBlox | Custom GUI', 5013109572)
+venyx:Notify("Notification", 'Loading. . .')
+print(game.Players.LocalPlayer)
+wait(.4)
+print('.')
+wait(1)
+print('.')
+wait(.1)
+print('.')
+wait(.5)
+print('Loaded!')
+venyx:Notify("Notification", 'Loaded!')
+
+-- Default Theme
+local themes = {
+Background = Color3.fromRGB(24, 24, 24), 
+Glow = Color3.fromRGB(0, 0, 0), 
+Accent = Color3.fromRGB(10, 10, 10), 
+LightContrast = Color3.fromRGB(20, 20, 20), 
+DarkContrast = Color3.fromRGB(14, 14, 14),  
+TextColor = Color3.fromRGB(255, 255, 255)
+}
+
+-- Page 1
+local page = venyx:addPage("Player", 5012544693)
+local section1 = page:addSection("Settings")
+local section2 = page:addSection("Extra")
+-- Speed & Jump Sliders
+section1:addSlider("Speed", 0, 16, 500, function(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+print("Speed: ", value)
+end)
+section1:addSlider("Jump Power", 0, 16, 500, function(value)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+print("Jump: ", value)
+end)
+-- Reset
+section1:addButton("Reset", function()
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+print("Killed")
+venyx:Notify("Notification", 'Successfully Reset!' )
+end)
+-- Extra
+section2:addButton("Noclip (Press 'E')", function()
+    venyx:Notify("Notification", 'Press (E) To Noclip!' )
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Bomby324/Noclipsd/main/README.md"))()
+print("Noclip Activated")
+end)
+section2:addButton("Fly (Press 'F')", function()
+    venyx:Notify("Notification", 'Press (F) To Fly!' )
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Bomby324/Fly/main/Fly"))()
+print("Fly Activated")
+end)
+
+
+-- Main
+local page = venyx:addPage("Main", 5012544693)
+--GUIs
+local section1 = page:addSection('Automatic GUIs')
+section1:addButton("Funky Friday Autoplayer GUI", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/funky-friday-autoplay/main/main.lua",true))()
+print("GUI Visible")
+venyx:Notify("Notification", 'GUI Loaded!')
+end)
+-- NONFE
+local section1 = page:addSection('NON-FE Scripts')
+section1:addButton("Sin Dragon (R6)", function()
+    venyx:Notify("Notification", 'YOU MUST BE IN R6 FOR THIS SCRIPT TO WORK!')
+    wait(1)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Bomby324/SINDRAGONNONFE/main/SINDRAGONNONFE",true))()
+print("Dragon")
+venyx:Notify("Notification", 'Sin Dragon Loaded!')
+end)
+
+-- Menu
+local page = venyx:addPage("Menu Settings", 5012544693)
+local section1 = page:addSection('Settings')
+section1:addKeybind("Toggle Menu Keybind", Enum.KeyCode.One, function()
+print("Activated Keybind")
+venyx:toggle()
+venyx:Notify("Notification", 'Menu Toggled! Press (Keybind) To Toggle It Again!')
+end)
+section1:addTextbox("Notification", "Enter Text Here", function(value, focusLost)
+print("Input", value)
+
+if focusLost then
+venyx:Notify("Notification", value)
+end
+end)
+
+
+
+-- Menu Color Page
+local theme = venyx:addPage("Menu Theme", 5012544693)
+local colors = theme:addSection("Colors")
+
+for theme, color in pairs(themes) do -- all in one theme changer, i know, im cool
+colors:addColorPicker(theme, color, function(color3)
+venyx:setTheme(theme, color3)
+end)
+end
+
+-- load
+venyx:SelectPage(venyx.pages[1], true)
