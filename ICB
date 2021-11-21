@@ -32,7 +32,7 @@ section1:addSlider("Speed", 0, 16, 500, function(value)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 print("Speed: ", value)
 end)
-section1:addSlider("Jump Power", 0, 16, 500, function(value)
+section1:addSlider("Jump Power", 0, 50, 500, function(value)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
 print("Jump: ", value)
 end)
@@ -102,5 +102,5 @@ venyx:setTheme(theme, color3)
 end)
 end
 
--- load
+-- Load Colors
 venyx:SelectPage(venyx.pages[1], true)
